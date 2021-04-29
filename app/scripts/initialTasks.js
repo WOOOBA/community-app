@@ -27,14 +27,14 @@
         //accessing from a file system or other servers
         else {
             if (mainLink.hostname != "") {
-                baseApiUrl = "https://" + mainLink.hostname + (mainLink.port ? ':' + mainLink.port : '');
+                baseApiUrl = "http://" + mainLink.hostname + (mainLink.port ? ':' + mainLink.port : '');
             }
 
             if (QueryParameters["baseApiUrl"]) {
                 baseApiUrl = QueryParameters["baseApiUrl"];
             }
             var queryLink = getLocation(baseApiUrl);
-            host = "https://" + queryLink.hostname + (queryLink.port ? ':' + queryLink.port : '');
+            host = "http://" + queryLink.hostname + (queryLink.port ? ':' + queryLink.port : '');
             portNumber = queryLink.port;
 
             $httpProvider.defaults.headers.common['Fineract-Platform-TenantId'] = 'default';
@@ -47,7 +47,7 @@
 
         ResourceFactoryProvider.setBaseUrl(host);
         HttpServiceProvider.addRequestInterceptor('demoUrl', function (config) {
-            return _.extend(config, {url: host + config.url });
+            return _.extend(config, { url: host + config.url });
         });
 
         // Enable CORS! (see e.g. http://enable-cors.org/)
